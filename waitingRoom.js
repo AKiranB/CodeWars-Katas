@@ -1,0 +1,3 @@
+function lastChair(N){
+    // TODO
+  }
