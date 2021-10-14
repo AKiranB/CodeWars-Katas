@@ -6,7 +6,6 @@
 
 function decodeMorse(morse) {
     let splitMorseCode = morse.trim().split('  ').join(' ').split(' ')
-
     let decoded = splitMorseCode.map(el => {
         return el === '' ? ' ' : MORSE_CODE[el]
     })
