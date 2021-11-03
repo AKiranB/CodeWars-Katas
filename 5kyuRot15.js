@@ -8,3 +8,5 @@ const rot13 = (message) => {
     })
     return resArr.join("")
 }
+
+console.log(rot13('Pbqrjnef'))

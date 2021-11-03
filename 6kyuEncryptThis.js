@@ -10,5 +10,3 @@ var encryptThis = function (text) {
     })
     return returnStr.join(' ')
 }
-console.log(encryptThis("A wise old owl lived in an oak"))
-console.log(encryptThis("Hello World"))
