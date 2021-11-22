@@ -23,6 +23,6 @@ console.log(isBalanced("(Sensei [says) no!]", "()"))
 
 let string = 'dog'
 
-// (symbols.indexOf(symbols[j]) + 1) % 2 === 1 ? total +=1 : total -= 1
+
 
 console.log(string.indexOf('d'))
