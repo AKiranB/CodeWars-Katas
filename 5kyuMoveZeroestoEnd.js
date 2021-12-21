@@ -8,8 +8,10 @@ var moveZeros = function (arr) {
             tmpArr.push(el)
         }
     })
-    for (let i = 0; i < arr.join('').split(0).length - 1; i++) {
+      for (let i = 0; i < arr.join('').split(0).length - 1; i++) {
         tmpArr.push(0)
     }
     return tmpArr
 }
+
+
