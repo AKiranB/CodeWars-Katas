@@ -10,3 +10,5 @@ function digital_root(n) {
     let sum = n.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b))
     return digital_root(sum)
 }
+
+console.log('hello')
