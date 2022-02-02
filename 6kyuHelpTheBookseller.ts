@@ -18,6 +18,26 @@ class G964 {
         return stockObject;
     };
 };
+//object.fromEntries can't be used with codewars, needs to be done manually
+
+//js below
+// const stockList = (listOfArt, listOfCat) => {
+
+//     const entries = listOfCat.map((categoryCode) => {
+//         return [categoryCode, 0]
+//     });
+//     const stockObject = Object.fromEntries(entries);
+//     for (const book in stockObject) {
+//         listOfArt.forEach(article => {
+//             if (book === article[0]) {
+//                 stockObject[book] += parseInt(article.slice(article.length - 3))
+//             };
+//         });
+//     };
+//     return stockObject;
+// };
+
+
 
 
 
