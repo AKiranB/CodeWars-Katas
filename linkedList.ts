@@ -140,11 +140,13 @@ class LinkedList<T> implements ILinkedList<T> {
     let currNode = prevNode?.next;
 
     for (let i = 0; i < index - 1; i++) {
-      prevNode = currNode?.next as NodeType<T>;
+      prevNode = currNode as NodeType<T>;
+      currNode = currNode?.next;
     }
 
-    console.log(currNode);
-    console.log(prevNode);
+    if (currNode === this.tail) {
+      this.tail = prevNode;
+    }
 
     return undefined;
   }
