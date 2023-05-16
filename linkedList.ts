@@ -129,26 +129,35 @@ class LinkedList<T> implements ILinkedList<T> {
     if (index < 0 || index > this.count) {
       return undefined;
     }
+
     if (index === 0) {
       const nextNode = this.head?.next;
       this.head && (this.head.next = null);
       this.head = nextNode as NodeType<T>;
-
       return this.head?.value;
     }
+
     let prevNode = this.head;
     let currNode = prevNode?.next;
 
-    for (let i = 0; i < index - 1; i++) {
-      prevNode = currNode as NodeType<T>;
-      currNode = currNode?.next;
+    for (let i = 0; i < index - 1 && currNode; i++) {
+      prevNode = currNode;
+      currNode = currNode.next;
+    }
+
+    if (!currNode) {
+      return undefined;
     }
 
     if (currNode === this.tail) {
       this.tail = prevNode;
+      prevNode?.next && (prevNode.next = null);
+      return this.tail?.value;
+    } else {
+      prevNode?.next && (prevNode.next = currNode.next);
+      currNode.next = null;
+      return currNode.value;
     }
-
-    return undefined;
   }
 
   printList(): void {
@@ -162,14 +171,11 @@ class LinkedList<T> implements ILinkedList<T> {
 
 const list = new LinkedList<string>();
 
-// Populate the list with letters ascending from 'a'
 for (let i = 0; i < 10; i++) {
   const letter = String.fromCharCode("a".charCodeAt(0) + i);
   list.append(letter);
 }
 
-list.removeAt(5);
+console.log(list.removeAt(5));
 
-list.printList(); // Print the list
-
-// Print the list
+list.printList();
