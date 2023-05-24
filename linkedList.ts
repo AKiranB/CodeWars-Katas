@@ -6,6 +6,8 @@ interface ILinkedList<T> {
   append(item: T): void;
   prepend(item: T): void;
   get(index: number): T | undefined;
+  getHead(): T | undefined;
+  getTail(): T | undefined;
   printList(): void;
 }
 
@@ -14,7 +16,7 @@ type NodeType<T> = {
   next: NodeType<T> | null;
 };
 
-class LinkedList<T> implements ILinkedList<T> {
+export default class LinkedList<T> implements ILinkedList<T> {
   private head: NodeType<T> | null = null;
   private tail: NodeType<T> | null = null;
   private count = 0;
@@ -65,6 +67,14 @@ class LinkedList<T> implements ILinkedList<T> {
     return currentNode?.value;
   }
 
+  getHead(): T | undefined {
+    return this.head?.value;
+  }
+
+  getTail(): T | undefined {
+    return this.tail?.value;
+  }
+
   insertAt(item: T, index: number): void {
     const node: NodeType<T> = {
       value: item,
@@ -108,7 +118,7 @@ class LinkedList<T> implements ILinkedList<T> {
     let prevNode = this.head;
     let currentNode = this.head.next;
 
-    for (let i = 0; i < this.count; i++) {
+    for (let i = 0; i < this.count - 1; i++) {
       if (currentNode?.value === item) {
         if (currentNode === this.tail) {
           this.tail = prevNode;
@@ -126,37 +136,40 @@ class LinkedList<T> implements ILinkedList<T> {
   }
 
   removeAt(index: number): T | undefined {
-    if (index < 0 || index > this.count) {
+    if (index < 1 || index > this.count) {
       return undefined;
     }
 
-    if (index === 0) {
+    if (index === 1) {
       const nextNode = this.head?.next;
+      const value = this.head?.value;
       this.head && (this.head.next = null);
       this.head = nextNode as NodeType<T>;
-      return this.head?.value;
+      return value;
     }
-
     let prevNode = this.head;
-    let currNode = prevNode?.next;
-
-    for (let i = 0; i < index - 1 && currNode; i++) {
-      prevNode = currNode;
-      currNode = currNode.next;
+    let nodeToBeDeleted = prevNode?.next;
+    for (let i = 1; i < index - 1; i++) {
+      //@ts-ignore
+      prevNode = nodeToBeDeleted;
+      //@ts-ignore
+      nodeToBeDeleted = nodeToBeDeleted.next;
     }
 
-    if (!currNode) {
+    if (!nodeToBeDeleted) {
       return undefined;
     }
-
-    if (currNode === this.tail) {
+    if (nodeToBeDeleted === this.tail) {
+      const value = this.tail.value;
       this.tail = prevNode;
       prevNode?.next && (prevNode.next = null);
-      return this.tail?.value;
+      return value;
     } else {
-      prevNode?.next && (prevNode.next = currNode.next);
-      currNode.next = null;
-      return currNode.value;
+      //the issue lies here
+      const value = nodeToBeDeleted.value;
+      console.log(value);
+      prevNode?.next && (prevNode.next = nodeToBeDeleted.next);
+      return value;
     }
   }
 
@@ -169,13 +182,11 @@ class LinkedList<T> implements ILinkedList<T> {
   }
 }
 
-const list = new LinkedList<string>();
+const list = new LinkedList<number>();
 
-for (let i = 0; i < 10; i++) {
-  const letter = String.fromCharCode("a".charCodeAt(0) + i);
-  list.append(letter);
-}
+const node1 = 42;
+const node2 = 99;
+list.append(node1);
+list.append(node2);
 
-console.log(list.removeAt(5));
-
-list.printList();
+console.log(list.removeAt(2));
