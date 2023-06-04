@@ -34,14 +34,40 @@ describe("LinkedList", () => {
     list.append(node2);
     expect(list.removeAt(1)).toBe(node1);
   });
-  it("should delete linked list tail", () => {
+  it("should delete a value at an index in linkedList", () => {
     const list = new LinkedList<number>();
     const node1 = 42;
     const node2 = 99;
     list.append(node1);
     list.append(node2);
     expect(list.removeAt(1)).toBe(node1);
-    // expect(list.getHead()).toBe(node2);
+    expect(list.getHead()).toBe(node2);
     expect(list.getTail()).toBe(node2);
+  });
+  it("should get a value at an index in linkedList", () => {
+    const list = new LinkedList<number>();
+    const node1 = 42;
+    const node2 = 99;
+    list.append(node1);
+    list.append(node2);
+    expect(list.get(1)).toBe(node1);
+  });
+  it("should insert a value at an index in linkedList", () => {
+    const list = new LinkedList<number>();
+    const node1 = 42;
+    const node2 = 99;
+    const node3 = 100;
+    list.append(node1);
+    list.append(node2);
+    list.insertAt(node3, 1);
+    expect(list.get(1)).toBe(node3);
+  });
+  it("should get the length of the linkedList", () => {
+    const list = new LinkedList<number>();
+    const node1 = 42;
+    const node2 = 99;
+    list.append(node1);
+    list.append(node2);
+    expect(list.length).toBe(2);
   });
 });

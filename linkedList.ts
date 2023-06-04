@@ -55,13 +55,13 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   get(index: number): T | undefined {
-    if (index < 0 || index > this.count) {
+    if (index < 1 || index > this.count) {
       return undefined;
     }
 
     let currentNode = this.head;
 
-    for (let i = 0; i < index; i++) {
+    for (let i = 1; i < index; i++) {
       currentNode = currentNode?.next as NodeType<T>;
     }
     return currentNode?.value;
@@ -80,10 +80,10 @@ export default class LinkedList<T> implements ILinkedList<T> {
       value: item,
       next: null,
     };
-    if (index < 0 || index > this.length) {
+    if (index < 1 || index > this.length) {
       return;
     }
-    if (index === 0) {
+    if (index === 1) {
       this.prepend(item);
       return;
     }
@@ -92,7 +92,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
       return;
     }
     let currentNode = this.head;
-    for (let i = 0; i < index - 1; i++) {
+    for (let i = 1; i < index - 1; i++) {
       currentNode = currentNode?.next as NodeType<T>;
     }
     node.next = currentNode?.next as NodeType<T>;
@@ -165,9 +165,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
       prevNode?.next && (prevNode.next = null);
       return value;
     } else {
-      //the issue lies here
       const value = nodeToBeDeleted.value;
-      console.log(value);
       prevNode?.next && (prevNode.next = nodeToBeDeleted.next);
       return value;
     }
@@ -176,7 +174,6 @@ export default class LinkedList<T> implements ILinkedList<T> {
   printList(): void {
     let currentNode = this.head;
     while (currentNode) {
-      console.log(currentNode.value);
       currentNode = currentNode.next;
     }
   }
@@ -189,4 +186,5 @@ const node2 = 99;
 list.append(node1);
 list.append(node2);
 
+console.log(list.get(1));
 console.log(list.removeAt(2));
